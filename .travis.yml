@@ -1,0 +1,14 @@
+sudo: false
+language: ruby
+addons:
+  postgresql: '9.6'
+services:
+  - postgresql
+  - redis-server
+rvm:
+  - 2.4.0
+before_script:
+  - psql -c 'create database qboard_test' -U postgres
+script:
+  - bundle exec rails db:migrate RAILS_ENV=test
+  - bundle exec rspec  
